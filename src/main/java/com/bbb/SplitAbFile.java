@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 public class SplitAbFile {
 
     public static void main(String[] args) {
-        File baseDir = new File("bbb/origin");
+        File baseDir = new File("bbb/src");
         byte[] header = new byte[]{0x55, 0x6e, 0x69, 0x74, 0x79, 0x46, 0x53  };
         for(File file : baseDir.listFiles()){
             int outputIdx = 0;

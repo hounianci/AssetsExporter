@@ -62,7 +62,18 @@ public class FileByteUtils {
 
 	public static long byteToInt(int[] data, boolean bigEndian) {
 		long res = 0;
-		if(bigEndian) {
+		if(!bigEndian) {
+			reverseData(data);
+		}
+		for(int i=0; i<4; i++) {
+			long tmp = 0xff&data[i];
+			res += tmp<<((3-i)*8);
+		}
+		return res;
+	}
+	public static long byteToInt(byte[] data, boolean bigEndian) {
+		long res = 0;
+		if(!bigEndian) {
 			reverseData(data);
 		}
 		for(int i=0; i<4; i++) {
@@ -74,7 +85,7 @@ public class FileByteUtils {
 	
 	public static long byteToLong(int[] data, boolean bigEndian) {
 		long res = 0;
-		if(bigEndian) {
+		if(!bigEndian) {
 			reverseData(data);
 		}
 		for(int i=0; i<8; i++) {
@@ -86,7 +97,7 @@ public class FileByteUtils {
 	
 	public static int byteToShort(int[] data, boolean bigEndian) {
 		int res = 0;
-		if(bigEndian) {
+		if(!bigEndian) {
 			reverseData(data);
 		}
 		for(int i=0; i<2; i++) {
