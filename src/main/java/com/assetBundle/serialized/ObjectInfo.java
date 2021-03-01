@@ -23,6 +23,17 @@ public class ObjectInfo {
         classID = type.getClassID();
     }
 
+    @Override
+    public String toString() {
+        return "ObjectInfo{" +
+                "byteStart=" + Long.toHexString(byteStart) +
+                ", byteSize=" + byteSize +
+                ", typeID=" + typeID +
+                ", classID=" + classID +
+                ", pathID=" + pathID +
+                '}';
+    }
+
     public long getByteStart() {
         return byteStart;
     }

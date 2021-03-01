@@ -40,6 +40,7 @@ public class SerializedFile {
     }
 
     public SerializedFile(String fullName, ArrayInputStream is) throws Exception {
+        data = is.getData().getData();
         this.fullName = fullName;
         header = new SerializedFileHeader(is);
         int typeCount = readInt(is);
@@ -91,5 +92,13 @@ public class SerializedFile {
 
     public void setTypes(List<SerializedType> types) {
         this.types = types;
+    }
+
+    public List<ObjectInfo> getObjects() {
+        return objects;
+    }
+
+    public void setObjects(List<ObjectInfo> objects) {
+        this.objects = objects;
     }
 }

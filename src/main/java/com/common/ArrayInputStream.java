@@ -42,4 +42,16 @@ public class ArrayInputStream extends InputStream {
     public void setBigEndian(boolean bigEndian) {
         isBigEndian = bigEndian;
     }
+
+    public ByteArray getData() {
+        return data;
+    }
+
+    public void setData(ByteArray data) {
+        this.data = data;
+    }
+
+    public int getIdx() {
+        return idx;
+    }
 }

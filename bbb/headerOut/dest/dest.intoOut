@@ -5,6 +5,8 @@ BundleBlockInfo{compressSize=a564, uncompressSize=bc30, flag=3}
 
 --- node start ---
 BundleNodeInfo{offset=0, size=1178, flag=4, path='CAB-3806c11635a01b36173b3750a2ce773c'}
+ObjectInfo{byteStart=1000, byteSize=172, typeID=0, classID=142, pathID=1}
+ObjectInfo{byteStart=10b0, byteSize=200, typeID=1, classID=28, pathID=1828843847}
 BundleNodeInfo{offset=1178, size=aab8, flag=0, path='CAB-3806c11635a01b36173b3750a2ce773c.resS'}
 
 --- node end ---

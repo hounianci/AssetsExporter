@@ -46,6 +46,14 @@ public class StreamUtil {
         is.read(bb);
         return (int) FileByteUtils.byteToLong(bb, bigEndian);
     }
+
+    public static String readAlignedString(ArrayInputStream is) throws Exception {
+        int len = readInt(is);
+        byte[] data = readBytes(is, len);
+        is.alignStream(4);
+        return new String(data);
+    }
+
     public static String readString(ArrayInputStream is) throws Exception{
         int b = 0;
         ByteArray array = new ByteArray();
