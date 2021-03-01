@@ -1,0 +1,10 @@
+BundleHeader{fileSize=320, headerCompressSize=55, headerUncompressSize=99, flag=843, blockInfoCount=1, nodeCount=2}
+--- block start ---
+BundleBlockInfo{compressSize=299, uncompressSize=111a8, flag=3}
+--- block end ---
+
+--- node start ---
+BundleNodeInfo{offset=0, size=11a8, flag=4, path='CAB-d93ffbce250b3cb701c3d301c0dfd3f8'}
+BundleNodeInfo{offset=11a8, size=10000, flag=0, path='CAB-d93ffbce250b3cb701c3d301c0dfd3f8.resS'}
+
+--- node end ---

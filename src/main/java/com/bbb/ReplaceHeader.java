@@ -42,9 +42,9 @@ public class ReplaceHeader {
                     if(zipData.getDataLen()>300){
                         continue;
                     }
-                    header.setLong(0x1e, file.length());
-                    header.setInt(0x26, zipData.getDataLen());
-                    header.setInt(0x2a, calcUncompressDataSize(zipData));
+                    header.setLong(0x1e, file.length(), true);
+                    header.setInt(0x26, zipData.getDataLen(), true);
+                    header.setInt(0x2a, calcUncompressDataSize(zipData), true);
                     try(FileOutputStream os = new FileOutputStream(new File("bbb/output/"+splitSubDir.getName()+"/"+file.getName()+".output"))){
                         os.write(header.getData());
                         os.write(zipData.getData());

@@ -10,6 +10,11 @@ public class ByteArray {
 	public ByteArray() {
 		this(DEF_INIT_LEN);
 	}
+	public ByteArray(byte[] data) {
+		this.data = data;
+		dataLen = data.length;
+		writeIdx = 0;
+	}
 	public ByteArray(int initLen) {
 		data = new byte[initLen];
 		dataLen = 0;
@@ -33,22 +38,22 @@ public class ByteArray {
 		}
 	}
 
-	public boolean setInt(int offset, int value){
+	public boolean setInt(int offset, int value, boolean isBigEndian){
 		if(offset+4 > dataLen){
 			return false;
 		}
-		byte[] bb = FileByteUtils.intToByte(value, true);
+		byte[] bb = FileByteUtils.intToByte(value, isBigEndian);
 		for(int i=0; i<4; i++){
 			data[offset+i] = bb[i];
 		}
 		return true;
 	}
 
-	public boolean setLong(int offset, long value){
+	public boolean setLong(int offset, long value, boolean isBigEndian){
 		if(offset+8 > dataLen){
 			return false;
 		}
-		byte[] bb = FileByteUtils.longToByte(value, true);
+		byte[] bb = FileByteUtils.longToByte(value, isBigEndian);
 		for(int i=0; i<8; i++){
 			data[offset+i] = bb[i];
 		}
