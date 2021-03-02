@@ -4,7 +4,9 @@ import com.assetBundle.BundleBlockInfo;
 import com.assetBundle.BundleHeader;
 import com.assetBundle.BundleNodeInfo;
 import com.assetBundle.ObjectReader;
+import com.assetBundle.asset.AsObject;
 import com.assetBundle.asset.NamedAsObject;
+import com.assetBundle.asset.Texture2D;
 import com.assetBundle.serialized.ObjectInfo;
 import com.assetBundle.serialized.SerializedFile;
 import com.common.ArrayInputStream;
@@ -24,21 +26,22 @@ public class ReadAsFile {
     public static List<SerializedFile> assetsFileList;
 
     public static void main(String[] args) {
-        resourceFileReaders = new HashMap<>();
-        assetsFileList = new ArrayList<>();
         File dir = new File("bbb/header/");
         for(File file : dir.listFiles()){
+            resourceFileReaders = new HashMap<>();
+            assetsFileList = new ArrayList<>();
             if(file.getName().startsWith("_")){
                 continue;
             }
-            String fileName = file.getName().substring(0, file.getName().indexOf('.'));
+            String fileName = file.getName();
             String outputPath = "bbb/headerOut/"+fileName;
             File outputDir = new File(outputPath);
             outputDir.mkdirs();
             try(FileInputStream is = new FileInputStream(file);
-                FileOutputStream infoOs = new FileOutputStream(new File(outputPath+"/"+fileName+".intoOut"));
+                FileOutputStream infoOs = new FileOutputStream(new File(outputPath+"/"+fileName+".infoOut"));
                 FileOutputStream headerUncompressOs = new FileOutputStream(new File(outputPath+"/"+fileName+".headerOut"));){
                 BundleHeader header = new BundleHeader(is);
+                headerUncompressOs.write(header.getUncompressHeader());
                 infoOs.write(header.toString().getBytes());
                 infoOs.write("\n--- block start ---\n".getBytes());
                 for(int i=0; i<header.getBlockInfoCount(); i++){
@@ -72,14 +75,23 @@ public class ReadAsFile {
                     infoOs.write(nodeInfoBuilder.toString().getBytes());
                 }
                 infoOs.write("\n--- node end ---\n".getBytes());
-                headerUncompressOs.write(header.getUncompressHeader());
+                infoOs.write("\n--- object start ---\n".getBytes());
                 for(SerializedFile serializedFile : assetsFileList){
                     for(ObjectInfo objectInfo : serializedFile.getObjects()){
                         ArrayInputStream inputStream = new ArrayInputStream(serializedFile.getData());
                         ObjectReader objectReader = new ObjectReader(inputStream, serializedFile, objectInfo);
-                        NamedAsObject namedAsObject = new NamedAsObject(objectReader);
+                        AsObject obj = null;
+                        switch (objectInfo.getClassID()){
+                            case 28:
+                                obj = new Texture2D(objectReader);
+                                break;
+                        }
+                        if(obj != null){
+                            infoOs.write(("\n"+obj.toString()+"\n").getBytes());
+                        }
                     }
                 }
+                infoOs.write("\n--- object end ---\n".getBytes());
             }catch (Exception e){
                 e.printStackTrace();
             }

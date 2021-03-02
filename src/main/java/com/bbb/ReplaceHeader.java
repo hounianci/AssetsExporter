@@ -12,7 +12,7 @@ import java.io.FileOutputStream;
 public class ReplaceHeader {
     public static void main(String[] args) {
         ByteArray header = readHeader();
-        File splitDir = new File("bbb/split");
+        File splitDir = new File("bbb/replaceSrc");
         StringBuilder errorFile = new StringBuilder();
         int successSize = 0;
         int failSize = 0;
@@ -26,15 +26,27 @@ public class ReplaceHeader {
                     is.skip(0x32);
                     ByteArray zipData = new ByteArray();
                     byte[] zipB = new byte[1];
-                    byte[] zipEnd = {(byte) 0xf0, 0x1};
+                    byte[][] zipEnd = {{(byte) 0xf0}, {0x1,0x0}};
+                    int[] zipMatchIdx = new int[zipEnd.length];
                     int zipEndMatchIdx = 0;
-                    while(is.read(zipB)!=-1){
-                        if(zipB[0]==zipEnd[zipEndMatchIdx]){
+                    a:while(is.read(zipB)!=-1){
+                        boolean zipEndMatch = false;
+                        for(int i=0; i<zipEnd[zipEndMatchIdx].length; i++){
+                            if(zipB[0]==zipEnd[zipEndMatchIdx][i]){
+                                zipEndMatch = true;
+                                zipMatchIdx[zipEndMatchIdx] = i;
+                                break ;
+                            }
+                        }
+                        if(zipEndMatch){
                             zipEndMatchIdx++;
                             if(zipEndMatchIdx==zipEnd.length){
-                                break;
+                                break a;
                             }
                         }else{
+                            if(zipEndMatchIdx==1){
+                                zipData.addData(zipEnd[0][zipMatchIdx[0]]);
+                            }
                             zipEndMatchIdx = 0;
                             zipData.addData(zipB[0]);
                         }
@@ -48,7 +60,8 @@ public class ReplaceHeader {
                     try(FileOutputStream os = new FileOutputStream(new File("bbb/output/"+splitSubDir.getName()+"/"+file.getName()+".output"))){
                         os.write(header.getData());
                         os.write(zipData.getData());
-                        os.write(zipEnd);
+                        os.write(zipEnd[0][zipMatchIdx[0]]);
+                        os.write(zipEnd[1][zipMatchIdx[1]]);
                         while ((len=is.read(bb))!=-1){
                             os.write(bb, 0, len);
                         }

@@ -7,6 +7,7 @@ public class SerializedFileHeader {
     private int metadataSize;
     private long fileSize;
     private int version;
+    private int[] versionArray;
     private long dataOffset;
     private byte endian;
     private byte[] reserved;
@@ -37,6 +38,7 @@ public class SerializedFileHeader {
         }
         if(version >= 7){
             unityVersion = readString(is);
+            convertUnityVersion();
         }
         if(version >= 8){
             targetPlatForm = readInt(is);
@@ -46,12 +48,49 @@ public class SerializedFileHeader {
         }
     }
 
+    public void convertUnityVersion(){
+        StringBuilder builder = new StringBuilder();
+        int idx = 0;
+        versionArray = new int[4];
+        unityVersion.trim();
+        for(int i=0; i<unityVersion.length(); i++){
+            char c = unityVersion.charAt(i);
+            if(c>='0' && c<='9'){
+                builder.append(c);
+            }else{
+                if(builder.length()>0){
+                    versionArray[idx++] = Integer.valueOf(builder.toString());
+                }
+                builder = new StringBuilder();
+            }
+        }
+        if(idx<4 && builder.length()>0){
+            versionArray[idx++] = Integer.valueOf(builder.toString());
+        }
+    }
+
     public int getMetadataSize() {
         return metadataSize;
     }
 
     public void setMetadataSize(int metadataSize) {
         this.metadataSize = metadataSize;
+    }
+
+    public int[] getVersionArray() {
+        return versionArray;
+    }
+
+    public void setVersionArray(int[] versionArray) {
+        this.versionArray = versionArray;
+    }
+
+    public String getUnityVersion() {
+        return unityVersion;
+    }
+
+    public void setUnityVersion(String unityVersion) {
+        this.unityVersion = unityVersion;
     }
 
     public long getFileSize() {

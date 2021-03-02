@@ -11,4 +11,12 @@ public class NamedAsObject extends AsObject {
         super(reader);
         name = StreamUtil.readAlignedString(reader.getIs());
     }
+
+    @Override
+    public String toString() {
+        return "NamedAsObject{" +
+                "streamingInfo=" + streamingInfo +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

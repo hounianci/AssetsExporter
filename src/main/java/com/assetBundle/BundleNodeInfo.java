@@ -30,8 +30,8 @@ public class BundleNodeInfo {
     @Override
     public String toString() {
         return "BundleNodeInfo{" +
-                "offset=" + Long.toHexString(offset) +
-                ", size=" + Long.toHexString(size) +
+                "offset=" + offset +
+                ", size=" + size +
                 ", flag=" + Integer.toHexString(flag) +
                 ", path='" + path + '\''+
                 '}';
