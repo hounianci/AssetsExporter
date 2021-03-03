@@ -26,28 +26,32 @@ public class ReplaceHeader {
                     is.skip(0x32);
                     ByteArray zipData = new ByteArray();
                     byte[] zipB = new byte[1];
-                    byte[][] zipEnd = {{(byte) 0xf0}, {0x1,0x0}};
+                    byte[][] zipEnd = {{(byte) 0xf0, (byte)0xe0}, {0x1,0x0,0x14,}};
                     int[] zipMatchIdx = new int[zipEnd.length];
                     int zipEndMatchIdx = 0;
                     a:while(is.read(zipB)!=-1){
-                        boolean zipEndMatch = false;
-                        for(int i=0; i<zipEnd[zipEndMatchIdx].length; i++){
-                            if(zipB[0]==zipEnd[zipEndMatchIdx][i]){
-                                zipEndMatch = true;
-                                zipMatchIdx[zipEndMatchIdx] = i;
-                                break ;
+                        if(zipData.getDataLen() > 0x30){
+                            boolean zipEndMatch = false;
+                            for(int i=0; i<zipEnd[zipEndMatchIdx].length; i++){
+                                if(zipB[0]==zipEnd[zipEndMatchIdx][i]){
+                                    zipEndMatch = true;
+                                    zipMatchIdx[zipEndMatchIdx] = i;
+                                    break ;
+                                }
                             }
-                        }
-                        if(zipEndMatch){
-                            zipEndMatchIdx++;
-                            if(zipEndMatchIdx==zipEnd.length){
-                                break a;
+                            if(zipEndMatch){
+                                zipEndMatchIdx++;
+                                if(zipEndMatchIdx==zipEnd.length){
+                                    break a;
+                                }
+                            }else{
+                                if(zipEndMatchIdx==1){
+                                    zipData.addData(zipEnd[0][zipMatchIdx[0]]);
+                                }
+                                zipEndMatchIdx = 0;
+                                zipData.addData(zipB[0]);
                             }
                         }else{
-                            if(zipEndMatchIdx==1){
-                                zipData.addData(zipEnd[0][zipMatchIdx[0]]);
-                            }
-                            zipEndMatchIdx = 0;
                             zipData.addData(zipB[0]);
                         }
                     }
@@ -68,7 +72,7 @@ public class ReplaceHeader {
                     }
                     successSize++;
                 }catch (Exception e){
-                    errorFile.append(file.getName()+"\n");
+                    errorFile.append(file.getName()+", "+file.length()+", "+splitSubDir.getName().length()+"\n");
                     System.out.println(file.getName());
                     System.out.println(e.getMessage());
                     System.out.println("----");
@@ -89,7 +93,14 @@ public class ReplaceHeader {
         LZ4Factory factory = LZ4Factory.fastestInstance();
         LZ4SafeDecompressor decompressor = factory.safeDecompressor();
         byte[] uncompressData = new byte[0xff];
-        decompressor.decompress(compressData.getData(), 0, compressData.getDataLen(), uncompressData, 0);
+        try{
+            decompressor.decompress(compressData.getData(), 0, compressData.getDataLen(), uncompressData, 0);
+        }catch (Exception e){
+            byte[] data = compressData.getData();
+            compressData.setDataLen(compressData.getDataLen()-20);
+            data = compressData.getData();
+            decompressor.decompress(data, 0, compressData.getDataLen(), uncompressData, 0);
+        }
         int idx = 0xff-1;
         //从后往前删0，只保留最后一个
         while(uncompressData[idx] == 0){

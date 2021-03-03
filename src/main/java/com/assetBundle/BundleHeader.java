@@ -6,7 +6,6 @@ import com.common.StreamUtil;
 import net.jpountz.lz4.LZ4Factory;
 import net.jpountz.lz4.LZ4SafeDecompressor;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,9 @@ public class BundleHeader {
             BundleNodeInfo nodeInfo = new BundleNodeInfo(headerIs);
             nodeList.add(nodeInfo);
         }
+    }
+
+    public void readBlockData(InputStream is) throws Exception {
         ByteArray blockData = new ByteArray();
         for(int i=0; i<blockInfoCount; i++){
             blockInfoList.get(i).readBlock(is, blockData);

@@ -91,4 +91,20 @@ public class ByteArray {
 	public void setWriteIdx(int writeIdx) {
 		this.writeIdx = writeIdx;
 	}
+
+	public static int getDefInitLen() {
+		return DEF_INIT_LEN;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public int getWriteIdx() {
+		return writeIdx;
+	}
+
+	public void setDataLen(int dataLen) {
+		this.dataLen = dataLen;
+	}
 }
