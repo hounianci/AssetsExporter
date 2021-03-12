@@ -54,7 +54,7 @@ public class StreamUtil {
         return new String(data);
     }
 
-    public static String readString(ArrayInputStream is) throws Exception{
+    public static String readString(InputStream is) throws Exception{
         int b = 0;
         ByteArray array = new ByteArray();
         while((b=is.read())!=-1 && b!=0){

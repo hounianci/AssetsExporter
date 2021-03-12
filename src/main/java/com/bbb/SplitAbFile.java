@@ -9,13 +9,13 @@ import java.io.FileOutputStream;
 public class SplitAbFile {
 
     public static void main(String[] args) {
-        File baseDir = new File("bbb/src");
+        File baseDir = new File("rok/src");
         byte[] header = new byte[]{0x55, 0x6e, 0x69, 0x74, 0x79, 0x46, 0x53  };
         for(File file : baseDir.listFiles()){
             int outputIdx = 0;
             int matchIdx = 0;
             String fileName = file.getName().substring(0, file.getName().lastIndexOf('.'));
-            File outDir = new File("bbb/split/"+fileName);
+            File outDir = new File("rok/split/"+fileName);
             outDir.mkdir();
             try(FileInputStream is = new FileInputStream(file);){
                 ByteArray outputData = new ByteArray();
@@ -29,7 +29,7 @@ public class SplitAbFile {
                             if(matchIdx==header.length){//匹配完成 输出文件
                                 matchIdx=0;
                                 if(outputData.getDataLen()>20){
-                                    File outputFile = new File("bbb/split/"+fileName+"/"+file.getName()+".p"+(outputIdx++));
+                                    File outputFile = new File("rok/split/"+fileName+"/"+file.getName()+".p"+(outputIdx++));
                                     try(FileOutputStream os = new FileOutputStream(outputFile)){
                                         os.write(header);
                                         byte[] fileData = outputData.getData();
@@ -41,6 +41,14 @@ public class SplitAbFile {
                         }else {
                             matchIdx=0;
                         }
+                    }
+                }
+                if(outputData.getDataLen()!=0){
+                    File outputFile = new File("rok/split/"+fileName+"/"+file.getName()+".p"+(outputIdx++));
+                    try(FileOutputStream os = new FileOutputStream(outputFile)){
+                        os.write(header);
+                        byte[] fileData = outputData.getData();
+                        os.write(fileData, 0, outputData.getDataLen());
                     }
                 }
             }catch (Exception e){

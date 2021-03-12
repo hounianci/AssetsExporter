@@ -19,6 +19,16 @@ public class ArrayInputStream extends InputStream {
         }
     }
 
+    public ArrayInputStream(InputStream is) throws IOException {
+        data = new ByteArray();
+        int len = 0;
+        byte[] tmp = new byte[1024*1024*10];
+        while((len=is.read(tmp)) != -1){
+            data.addData(tmp, 0, len);
+        }
+        isBigEndian = true;
+    }
+
     public ArrayInputStream(byte[] b){
         data = new ByteArray(b);
         isBigEndian = true;

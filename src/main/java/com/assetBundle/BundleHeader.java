@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.common.StreamUtil.*;
+
 public class BundleHeader {
     private long fileSize;
     private int headerCompressSize;
@@ -24,8 +26,14 @@ public class BundleHeader {
     private List<BundleBlockInfo> blockInfoList;
     private List<BundleNodeInfo> nodeList;
 
-    public BundleHeader(InputStream is) throws Exception {
-        is.skip(0x1e);
+    public BundleHeader(ArrayInputStream is) throws Exception {
+        String fileType = readString(is);
+        int version = readInt(is);
+        String unityVersion = readString(is);
+        String unityReversion = readString(is);
+        if(version>=7){
+            is.alignStream(16);
+        }
         fileSize = StreamUtil.readLong(is);
         headerCompressSize = StreamUtil.readInt(is);
         headerUncompressSize = StreamUtil.readInt(is);

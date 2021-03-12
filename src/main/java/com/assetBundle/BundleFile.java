@@ -24,7 +24,7 @@ public class BundleFile {
     private int stage = 0;
     private static final int HEAD=1, BLOCK=1<<1, NODE=1<<2;
 
-    public BundleFile(InputStream is,String fileName)  {
+    public BundleFile(ArrayInputStream is,String fileName)  {
         this.fileName = fileName;
         resourceFileReaders = new HashMap<>();
         assetsFileList = new ArrayList<>();
