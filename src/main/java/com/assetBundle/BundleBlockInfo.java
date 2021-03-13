@@ -37,9 +37,9 @@ public class BundleBlockInfo {
     @Override
     public String toString() {
         return "BundleBlockInfo{" +
-                "compressSize=" + Integer.toHexString(compressSize) +
-                ", uncompressSize=" + Integer.toHexString(uncompressSize) +
-                ", flag=" + Integer.toHexString(flag) +
+                "compressSize=0x" + Integer.toHexString(compressSize) +
+                ", uncompressSize=0x" + Integer.toHexString(uncompressSize) +
+                ", flag=0x" + Integer.toHexString(flag) +
                 '}';
     }
 
