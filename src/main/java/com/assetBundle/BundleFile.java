@@ -30,17 +30,16 @@ public class BundleFile {
         assetsFileList = new ArrayList<>();
         objects = new ArrayList<>();
         try{
-            bundleHeader = new BundleHeader(is);
+            bundleHeader = createHeader();
+            bundleHeader.readHeaderInfo(is);
         }catch (Exception e){
             e.printStackTrace();
-            return;
         }
         stage |= HEAD;
         try{
             bundleHeader.readBlockData(is);
         }catch (Exception e){
             e.printStackTrace();
-            return;
         }
         stage |= BLOCK;
         try{
@@ -128,6 +127,15 @@ public class BundleFile {
         }catch (Exception e){
             e.printStackTrace();
         }
+        outputOtherData(fileNamePrefix);
+    }
+
+    protected void outputOtherData(String fileNamePrefix) {
+
+    }
+
+    protected BundleHeader createHeader(){
+        return new BundleHeader();
     }
 
     @Override
@@ -141,5 +149,25 @@ public class BundleFile {
             builder.append(obj.toString()+"\n");
         }
         return builder.toString();
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public BundleHeader getBundleHeader() {
+        return bundleHeader;
+    }
+
+    public Map<String, ArrayInputStream> getResourceFileReaders() {
+        return resourceFileReaders;
+    }
+
+    public List<SerializedFile> getAssetsFileList() {
+        return assetsFileList;
+    }
+
+    public List<AsObject> getObjects() {
+        return objects;
     }
 }

@@ -22,4 +22,9 @@ public class Lz4Util {
         }
         return Arrays.copyOf(uncompressData, lastZeroIndex+1);
     }
+    public static void decodeLz4(byte[] compressData, byte[] dest){
+        LZ4Factory factory = LZ4Factory.unsafeInstance();
+        LZ4SafeDecompressor decompressor = factory.safeDecompressor();
+        decompressor.decompress(compressData, dest);
+    }
 }

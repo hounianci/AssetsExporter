@@ -4,16 +4,22 @@ import com.common.Lz4Util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class TryLz4Decode {
     public static void main(String[] args) {
-        File file = new File("lol/src/000448af5589769d5973e5d90cd2d23a.bytes");
-        try(FileInputStream is = new FileInputStream(file)){
-            is.skip(0x212);
-            byte[] compressData = new byte[0x3cb-0x212];
+        File file = new File("lz4/loadingprefab.b.node_0.blockComData.tryRep");
+        try(FileInputStream is = new FileInputStream(file);
+            FileOutputStream os = new FileOutputStream("lz4/loadingprefab.b.node_0.blockComData.tryUn")){
+            byte[] compressData = new byte[(int) file.length()];
             is.read(compressData);
-            byte[] uncompressData = Lz4Util.decodeLz4(compressData);
-            System.out.println(uncompressData.length);
+            byte[] uncompressData = new byte[0xffff];
+            try {
+                uncompressData = Lz4Util.decodeLz4(uncompressData);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            os.write(uncompressData);
         }catch (Exception e){
             e.printStackTrace();
         }

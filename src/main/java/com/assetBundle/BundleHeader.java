@@ -26,7 +26,10 @@ public class BundleHeader {
     private List<BundleBlockInfo> blockInfoList;
     private List<BundleNodeInfo> nodeList;
 
-    public BundleHeader(ArrayInputStream is) throws Exception {
+    public BundleHeader() {
+    }
+
+    public void readHeaderInfo(ArrayInputStream is) throws Exception {
         String fileType = readString(is);
         int version = readInt(is);
         String unityVersion = readString(is);
@@ -38,13 +41,21 @@ public class BundleHeader {
         headerCompressSize = StreamUtil.readInt(is);
         headerUncompressSize = StreamUtil.readInt(is);
         flag = StreamUtil.readInt(is);
-
+        afterHeaderInfo(is);
         compressHeader = new byte[headerCompressSize];
         is.read(compressHeader);
-        LZ4Factory factory = LZ4Factory.fastestInstance();
-        LZ4SafeDecompressor decompressor = factory.safeDecompressor();
-        uncompressHeader = new byte[headerUncompressSize];
-        decompressor.decompress(compressHeader, 0, headerCompressSize, uncompressHeader, 0);
+        switch (flag & 0x3f){
+            case 2:
+            case 3:
+                LZ4Factory factory = LZ4Factory.fastestInstance();
+                LZ4SafeDecompressor decompressor = factory.safeDecompressor();
+                uncompressHeader = new byte[headerUncompressSize];
+                decompressor.decompress(compressHeader, 0, headerCompressSize, uncompressHeader, 0);
+                break;
+            default:
+                uncompressHeader = compressHeader;
+                break;
+        }
 
         ArrayInputStream headerIs = new ArrayInputStream(uncompressHeader);
         headerIs.read(new byte[16]);
@@ -61,6 +72,8 @@ public class BundleHeader {
             nodeList.add(nodeInfo);
         }
     }
+
+    protected void afterHeaderInfo(ArrayInputStream is) throws Exception{}
 
     public void readBlockData(InputStream is) throws Exception {
         ByteArray blockData = new ByteArray();

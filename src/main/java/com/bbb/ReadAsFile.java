@@ -20,27 +20,40 @@ import java.util.Map;
 public class ReadAsFile {
 
     public static void main(String[] args) {
-        File dir = new File("tdj/header/");
+        File dir = new File("bbb/header/");
+        processDir(dir);
+    }
+
+    public static void processDir(File dir){
         for(File file : dir.listFiles()){
-            if(file.getName().startsWith("_")){
-                continue;
-            }
-            String fileName = file.getName();
-            String outputPath = "tdj/headerOut/";
-            File outputDir = new File(outputPath);
-            outputDir.mkdirs();
-            BundleFile bundleFile = null;
-            try(FileInputStream is = new FileInputStream(file);){
-                ArrayInputStream ais = new ArrayInputStream(is);
-                bundleFile = new BundleFile(ais, file.getName());
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try {
-                bundleFile.outputFileDetail(new File("tdj/headerOut/"));
-            }catch (Exception e){
-                e.printStackTrace();
+            if(file.isDirectory()){
+                processDir(file);
+            }else{
+                processFile(file);
             }
         }
     }
+
+    public static void processFile(File file){
+        if(file.getName().startsWith("_")){
+            return;
+        }
+        String fileName = file.getName();
+        String outputPath = "bbb/headerOut/";
+        File outputDir = new File(outputPath);
+        outputDir.mkdirs();
+        BundleFile bundleFile = null;
+        try(FileInputStream is = new FileInputStream(file);){
+            ArrayInputStream ais = new ArrayInputStream(is);
+            bundleFile = new BundleFile(ais, file.getName());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            bundleFile.outputFileDetail(new File("bbb/headerOut/"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

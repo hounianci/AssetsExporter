@@ -31,6 +31,10 @@ public class ByteArray {
 		data[writeIdx++] = b;
 		dataLen++;
 	}
+	public void addData(int i) {
+		byte b = (byte) (0xff&i);
+		addData(b);
+	}
 	
 	public void checkLen(int len) {
 		while(writeIdx+len >= data.length) {
