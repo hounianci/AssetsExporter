@@ -78,7 +78,11 @@ public class BundleHeader {
     public void readBlockData(InputStream is) throws Exception {
         ByteArray blockData = new ByteArray();
         for(int i=0; i<blockInfoCount; i++){
-            blockInfoList.get(i).readBlock(is, blockData);
+            try{
+                blockInfoList.get(i).readBlock(is, blockData);
+            }catch (Exception e){
+
+            }
         }
         for(int i=0; i<nodeCount; i++){
             nodeList.get(i).readNode(blockData);

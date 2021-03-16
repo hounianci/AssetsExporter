@@ -1,0 +1,52 @@
+stage:1
+HeaderInfo:
+BundleHeader{fileSize=ae227, headerCompressSize=b3, headerUncompressSize=14d, flag=243, blockInfoCount=13, nodeCount=2}
+load Objects:
+
+--- blockInfo ---
+
+BundleBlockInfo{compressSize=1244c, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=a74e, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=7b48, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=bd26, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=9526, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=994a, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=90f7, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=8267, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=7006, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=7090, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=8cfa, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=9a46, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=9a34, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=94c6, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=9644, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=ad60, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=9b8a, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=7f36, uncompressSize=20000, flag=103}
+
+BundleBlockInfo{compressSize=5f2, uncompressSize=f7e0, flag=103}
+
+--- nodeInfo ---
+
+BundleNodeInfo{offset=0, size=325600, flag=4, path='CAB-cb35e761da7f75f434dec79aad445ca7'}
+
+BundleNodeInfo{offset=325600, size=2097152, flag=0, path='CAB-cb35e761da7f75f434dec79aad445ca7.resS'}
+
+--- objInfo ---
