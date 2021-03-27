@@ -1,0 +1,23 @@
+stage:7
+HeaderInfo:
+BundleHeader{fileSize=4c56, headerCompressSize=58, headerUncompressSize=99, flag=843, blockInfoCount=1, nodeCount=2}
+load Objects:
+NamedAsObject{streamingInfo=StreamingInfo{offset=0, size=42688, path='archive:/CAB-614b6ff4c1eeef87527cab68a6d6bc01/CAB-614b6ff4c1eeef87527cab68a6d6bc01.resS'}, name='4.1BenaElf_Trail'}
+
+--- blockInfo ---
+
+BundleBlockInfo{compressSize=0x4bcc, uncompressSize=0xc118, flag=0x3}
+
+--- nodeInfo ---
+
+BundleNodeInfo{offset=0, size=6744, flag=4, path='CAB-614b6ff4c1eeef87527cab68a6d6bc01'}
+
+BundleNodeInfo{offset=6744, size=42688, flag=0, path='CAB-614b6ff4c1eeef87527cab68a6d6bc01.resS'}
+
+--- objInfo ---
+
+ObjectInfo{byteStart=1650, byteSize=196, typeID=0, classID=28, pathID=-1809784437}
+
+ObjectInfo{byteStart=1718, byteSize=324, typeID=1, classID=142, pathID=1}
+
+ObjectInfo{byteStart=1860, byteSize=504, typeID=2, classID=213, pathID=-1757442908}
