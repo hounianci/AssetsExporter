@@ -1,6 +1,7 @@
 package com.assetBundle;
 
 import com.assetBundle.asset.AsObject;
+import com.assetBundle.asset.Mesh;
 import com.assetBundle.asset.Texture2D;
 import com.assetBundle.serialized.ObjectInfo;
 import com.assetBundle.serialized.SerializedFile;
@@ -64,8 +65,15 @@ public class BundleFile {
                         case 28:
                             obj = new Texture2D(objectReader);
                             break;
+                        case 43:
+                            obj = new Mesh(objectReader);
+                            break;
+                        case 137:
+
+                            break;
                     }
                     if(obj!=null){
+                        obj.setObjectInfo(objectInfo);
                         objects.add(obj);
                     }
                 }

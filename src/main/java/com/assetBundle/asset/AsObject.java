@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class AsObject {
     private int[] version;
     protected StreamingInfo streamingInfo;
+    protected ObjectInfo objectInfo;
     public AsObject(ObjectReader reader){
         reader.reset();
         version = reader.getAssetFile().getHeader().getVersionArray();
@@ -21,10 +22,18 @@ public class AsObject {
         this.version = version;
     }
 
+    public ObjectInfo getObjectInfo() {
+        return objectInfo;
+    }
+
+    public void setObjectInfo(ObjectInfo objectInfo) {
+        this.objectInfo = objectInfo;
+    }
+
     @Override
     public String toString() {
         return "AsObject{" +
-                ", streamingInfo=" + streamingInfo.toString() +
+                "objectInfo=" + objectInfo +
                 '}';
     }
 }

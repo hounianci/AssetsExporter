@@ -1,0 +1,36 @@
+stage:7
+HeaderInfo:
+BundleHeader{fileSize=1d88e, headerCompressSize=6d, headerUncompressSize=c1, flag=43, blockInfoCount=5, nodeCount=2}
+load Objects:
+NamedAsObject{name='Beibao_atlas0_1', objectInfo=ObjectInfo{byteStart=0x1d80, byteSize=0xd4, typeID=0, classID=28, pathID=1550130037}}
+NamedAsObject{name='Beibao_atlas0', objectInfo=ObjectInfo{byteStart=0x2018, byteSize=0xd4, typeID=0, classID=28, pathID=1529638084}}
+
+--- blockInfo ---
+
+BundleBlockInfo{compressSize=0x3e79, uncompressSize=0x20000, flag=0x3}
+
+BundleBlockInfo{compressSize=0x6712, uncompressSize=0x20000, flag=0x3}
+
+BundleBlockInfo{compressSize=0xeeb0, uncompressSize=0x20000, flag=0x3}
+
+BundleBlockInfo{compressSize=0x38c8, uncompressSize=0x20000, flag=0x3}
+
+BundleBlockInfo{compressSize=0xaed, uncompressSize=0x51c8, flag=0x3}
+
+--- nodeInfo ---
+
+BundleNodeInfo{offset=0, size=20936, flag=0x4, path='CAB-e0671074ec153280c166e9a3c562bd48'}
+
+BundleNodeInfo{offset=20936, size=524288, flag=0x0, path='CAB-e0671074ec153280c166e9a3c562bd48.resS'}
+
+--- objInfo ---
+
+ObjectInfo{byteStart=0x1d80, byteSize=0xd4, typeID=0, classID=28, pathID=1550130037}
+
+ObjectInfo{byteStart=0x1e58, byteSize=0x1bc, typeID=1, classID=142, pathID=1}
+
+ObjectInfo{byteStart=0x2018, byteSize=0xd4, typeID=0, classID=28, pathID=1529638084}
+
+ObjectInfo{byteStart=0x20f0, byteSize=0x1850, typeID=2, classID=213, pathID=-1873261412}
+
+ObjectInfo{byteStart=0x3940, byteSize=0x1888, typeID=2, classID=213, pathID=1326887858}

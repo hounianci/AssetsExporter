@@ -1,0 +1,14 @@
+stage:7
+HeaderInfo:
+BundleHeader{fileSize=562, headerCompressSize=41, headerUncompressSize=5b, flag=243, blockInfoCount=1, nodeCount=1}
+load Objects:
+
+--- blockInfo ---
+
+BundleBlockInfo{compressSize=0x4a9, uncompressSize=0x118c, flag=0x103}
+
+--- nodeInfo ---
+
+BundleNodeInfo{offset=0, size=4492, flag=4, path='CAB-e98ca98e32d93aaf31caa805df4654bf'}
+
+--- objInfo ---

@@ -12,8 +12,8 @@ import java.util.Map;
 public class AnalyzeLz4File {
     static Map<String, Integer> keys = new HashMap<>();
     public static void main(String[] args) {
-        File base = new File("lz4/benaelf.blockComData");
-        File decode = new File("lz4/cavern01.b.node_0.blockComData");
+        File base = new File("lz4/good1.blockComData");
+        File decode = new File("lz4/bad1.blockComData");
         //信息
         File output = new File("lz4/"+decode.getName()+".lz4Info");
         //尝试还原压缩数据

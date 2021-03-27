@@ -26,8 +26,8 @@ public class ObjectInfo {
     @Override
     public String toString() {
         return "ObjectInfo{" +
-                "byteStart=" + Long.toHexString(byteStart) +
-                ", byteSize=" + byteSize +
+                "byteStart=0x" + Long.toHexString(byteStart) +
+                ", byteSize=0x" + Integer.toHexString(byteSize) +
                 ", typeID=" + typeID +
                 ", classID=" + classID +
                 ", pathID=" + pathID +

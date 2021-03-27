@@ -15,8 +15,8 @@ public class NamedAsObject extends AsObject {
     @Override
     public String toString() {
         return "NamedAsObject{" +
-                "streamingInfo=" + streamingInfo +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
+                ", objectInfo=" + objectInfo +
                 '}';
     }
 }

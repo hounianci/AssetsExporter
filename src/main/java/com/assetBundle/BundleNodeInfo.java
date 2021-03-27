@@ -32,7 +32,7 @@ public class BundleNodeInfo {
         return "BundleNodeInfo{" +
                 "offset=" + offset +
                 ", size=" + size +
-                ", flag=" + Integer.toHexString(flag) +
+                ", flag=0x" + Integer.toHexString(flag) +
                 ", path='" + path + '\''+
                 '}';
     }
